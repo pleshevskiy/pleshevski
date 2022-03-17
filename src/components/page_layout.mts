@@ -1,4 +1,4 @@
-import { AnyNode, Elem, Frag } from "../ren/nodes.mjs";
+import { AnyNode, Elem, Frag } from "ren";
 
 export async function PageLayout(children: AnyNode[]): Promise<Frag> {
   return new Frag()

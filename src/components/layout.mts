@@ -1,4 +1,4 @@
-import { AnyNode, Elem } from "../ren/nodes.mjs";
+import { AnyNode, Elem } from "ren";
 
 export async function Layout(page: AnyNode): Promise<Elem> {
   return new Elem("html")

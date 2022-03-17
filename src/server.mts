@@ -2,7 +2,7 @@ import * as http from "http";
 import { Layout } from "./components/layout.mjs";
 import { ServerConfig } from "./config.mjs";
 import { debug, info } from "./log.mjs";
-import { StrRenderer } from "./ren/str.mjs";
+import { StrRenderer } from "ren";
 import { AboutPage } from "./views/about.mjs";
 import { E404 } from "./views/e404.mjs";
 import { WorksPage } from "./views/works.mjs";
