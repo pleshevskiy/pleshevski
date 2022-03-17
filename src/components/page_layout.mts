@@ -1,12 +1,13 @@
-import { AnyNode, Elem, Frag } from "ren";
+import { AnyNode, Elem } from "ren";
 
-export async function PageLayout(children: AnyNode[]): Promise<Frag> {
-  return new Frag()
-    .withChild(Header())
-    .withChild(
-      new Elem("div").withAttr("class", "content").withChildren(children)
-    )
-    .withChild(Footer());
+export async function PageLayout(children: AnyNode[]): Promise<Elem> {
+  return new Elem("div")
+    .withAttr("id", "main")
+    .withChildren([
+      Header(),
+      new Elem("div").withAttr("class", "content").withChildren(children),
+      Footer(),
+    ]);
 }
 
 export function Header(): Elem {

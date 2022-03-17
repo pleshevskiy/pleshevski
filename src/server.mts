@@ -1,4 +1,6 @@
 import * as http from "http";
+import * as fs from "fs/promises";
+import * as path from "path";
 import { Layout } from "./components/layout.mjs";
 import { ServerConfig } from "./config.mjs";
 import { debug, info } from "./log.mjs";
@@ -23,19 +25,34 @@ async function handleHttpReq(
 
     debug("[server]", { req });
 
-    const ren = new StrRenderer();
-    if (/^[/](?:about[/]?)?$/.test(req.url)) {
-      httpRes
-        .writeHead(200, { "content-type": "text/html" })
-        .end(await ren.render(Layout(AboutPage())));
-    } else if (/^[/]works[/]?/.test(req.url)) {
-      httpRes
-        .writeHead(200, { "content-type": "text/html" })
-        .end(await ren.render(Layout(WorksPage())));
+    if (req.url.startsWith("/static")) {
+      const relFilePath = path.join(process.cwd(), req.url.slice(1));
+      const mimeType = mimeTypeByExt.get(path.extname(relFilePath));
+
+      const fileContent = await fs
+        .readFile(relFilePath, { encoding: "utf-8" })
+        .catch((_e) => null);
+
+      if (fileContent && mimeType) {
+        httpRes.writeHead(200, { "content-type": mimeType }).end(fileContent);
+      } else {
+        httpRes.writeHead(404).end("Not found");
+      }
     } else {
-      httpRes
-        .writeHead(404, { "content-type": "text/html" })
-        .end(await ren.render(Layout(E404())));
+      const ren = new StrRenderer();
+      if (/^[/](?:about[/]?)?$/.test(req.url)) {
+        httpRes
+          .writeHead(200, { "content-type": "text/html" })
+          .end(await ren.render(Layout(AboutPage())));
+      } else if (/^[/]works[/]?/.test(req.url)) {
+        httpRes
+          .writeHead(200, { "content-type": "text/html" })
+          .end(await ren.render(Layout(WorksPage())));
+      } else {
+        httpRes
+          .writeHead(404, { "content-type": "text/html" })
+          .end(await ren.render(Layout(E404())));
+      }
     }
   } catch (err) {
     if (err instanceof InvalidServerRequest) {
@@ -45,6 +62,11 @@ async function handleHttpReq(
     }
   }
 }
+
+const mimeTypeByExt = new Map([
+  [".html", "text/html"],
+  [".css", "text/css"],
+]);
 
 export function tryIntoAppServerRequest(
   req: http.IncomingMessage

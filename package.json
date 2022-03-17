@@ -11,6 +11,6 @@
     "typescript": "^4.6.2"
   },
   "dependencies": {
-    "ren": "github:pleshevskiy/ren"
+    "ren": "file:../../sandbox/ren"
   }
 }
