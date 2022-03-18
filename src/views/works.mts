@@ -1,6 +1,6 @@
 import { PageLayout } from "../components/page_layout.mjs";
-import { AnyAsyncNode, Elem } from "ren";
+import { AnyNode, Elem } from "ren";
 
-export async function WorksPage(): AnyAsyncNode {
-  return PageLayout([new Elem("p").withText("Works")]);
+export function WorksPage(): AnyNode {
+  return PageLayout(new Elem("p").withText("Works"));
 }

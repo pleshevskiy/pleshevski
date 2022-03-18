@@ -43,15 +43,15 @@ async function handleHttpReq(
       if (/^[/](?:about[/]?)?$/.test(req.url)) {
         httpRes
           .writeHead(200, { "content-type": "text/html" })
-          .end(await ren.render(Layout(AboutPage())));
+          .end(ren.render(Layout(AboutPage())));
       } else if (/^[/]works[/]?/.test(req.url)) {
         httpRes
           .writeHead(200, { "content-type": "text/html" })
-          .end(await ren.render(Layout(WorksPage())));
+          .end(ren.render(Layout(WorksPage())));
       } else {
         httpRes
           .writeHead(404, { "content-type": "text/html" })
-          .end(await ren.render(Layout(E404())));
+          .end(ren.render(Layout(E404())));
       }
     }
   } catch (err) {
@@ -63,10 +63,7 @@ async function handleHttpReq(
   }
 }
 
-const mimeTypeByExt = new Map([
-  [".html", "text/html"],
-  [".css", "text/css"],
-]);
+const mimeTypeByExt = new Map([[".css", "text/css"]]);
 
 export function tryIntoAppServerRequest(
   req: http.IncomingMessage

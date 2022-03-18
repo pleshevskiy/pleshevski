@@ -1,24 +1,24 @@
 import { AnyNode, Elem } from "ren";
 
-export async function PageLayout(children: AnyNode[]): Promise<Elem> {
+export function PageLayout(...children: AnyNode[]): Elem {
   return new Elem("div")
     .withAttr("id", "main")
-    .withChildren([
+    .withChildren(
       Header(),
-      new Elem("div").withAttr("class", "content").withChildren(children),
-      Footer(),
-    ]);
+      new Elem("div").withAttrs({ class: "content" }).withChildren(...children),
+      Footer()
+    );
 }
 
 export function Header(): Elem {
-  return new Elem("header").withChild(HeaderNav());
+  return new Elem("header").withChildren(HeaderNav());
 }
 
 export function HeaderNav(): Elem {
-  return new Elem("nav").withChildren([
+  return new Elem("nav").withChildren(
     new Elem("a").withAttr("href", "/").withText("About"),
-    new Elem("a").withAttr("href", "/works").withText("Works"),
-  ]);
+    new Elem("a").withAttr("href", "/works").withText("Works")
+  );
 }
 
 export function Footer(): Elem {
