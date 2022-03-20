@@ -1,17 +1,29 @@
-import { AnyNode, Elem } from "ren";
+import { AnyNode, E, Ea, Elem } from "ren";
+import { div } from "../utils.mjs";
 
 export function Layout(page: AnyNode): Elem {
-  return new Elem("html").withAttr("lang", "ru").withChildren(
-    new Elem("head").withChildren(
-      new Elem("meta").withAttr("charset", "utf-8"),
-      new Elem("link").withAttrs({
+  return Ea("html", { lang: "ru" }, [
+    E("head", [
+      Ea("meta", { charset: "utf-8" }),
+      Ea("meta", {
+        name: "viewport",
+        content: "width=device-width, initial-scale=1",
+      }),
+      Ea("link", {
         rel: "stylesheet",
         href: "/static/styles.css",
       }),
-      new Elem("title").withText("hello world")
-    ),
-    new Elem("body").withChildren(
-      new Elem("div").withAttr("id", "root").withChildren(page)
-    )
-  );
+      E("title", "hello world"),
+    ]),
+    E("body", [
+      div({ id: "root" }, page),
+      E(
+        "script",
+        `const ws = new WebSocket("ws://localhost:30001");
+        ws.addEventListener("message", (m) => {
+          if (m.data === "RELOAD") location.reload();
+        });`
+      ),
+    ]),
+  ]);
 }

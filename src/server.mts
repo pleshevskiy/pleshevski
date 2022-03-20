@@ -44,7 +44,7 @@ async function handleHttpReq(
         httpRes
           .writeHead(200, { "content-type": "text/html" })
           .end(ren.render(Layout(AboutPage())));
-      } else if (/^[/]works[/]?/.test(req.url)) {
+      } else if (/^[/]works[/]?$/.test(req.url)) {
         httpRes
           .writeHead(200, { "content-type": "text/html" })
           .end(ren.render(Layout(WorksPage())));

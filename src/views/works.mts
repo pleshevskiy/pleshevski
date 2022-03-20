@@ -1,6 +1,7 @@
 import { PageLayout } from "../components/page_layout.mjs";
-import { AnyNode, Elem } from "ren";
+import { AnyNode } from "ren";
+import { div, p } from "../utils.mjs";
 
 export function WorksPage(): AnyNode {
-  return PageLayout(new Elem("p").withText("Works"));
+  return PageLayout(div({ class: "content-width" }, p("Works")));
 }

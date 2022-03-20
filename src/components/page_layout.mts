@@ -1,26 +1,27 @@
-import { AnyNode, Elem } from "ren";
+import { AnyNode, E, Ea, Elem } from "ren";
+import { div } from "../utils.mjs";
 
 export function PageLayout(...children: AnyNode[]): Elem {
-  return new Elem("div")
-    .withAttr("id", "main")
-    .withChildren(
-      Header(),
-      new Elem("div").withAttrs({ class: "content" }).withChildren(...children),
-      Footer()
-    );
+  return Ea("div", { id: "main" }, [
+    Header(),
+    Ea("div", { class: "content" }, children),
+    Footer(),
+  ]);
 }
 
 export function Header(): Elem {
-  return new Elem("header").withChildren(HeaderNav());
+  return Ea("header", { class: "header" }, [
+    div({ class: "content-width" }, HeaderNav()),
+  ]);
 }
 
 export function HeaderNav(): Elem {
-  return new Elem("nav").withChildren(
-    new Elem("a").withAttr("href", "/").withText("About"),
-    new Elem("a").withAttr("href", "/works").withText("Works")
-  );
+  return E("nav", [
+    Ea("a", { href: "/" }, "Обо мне"),
+    Ea("a", { href: "/works" }, "Работы"),
+  ]);
 }
 
 export function Footer(): Elem {
-  return new Elem("footer").withAttr("class", "footer").withText("footer");
+  return Ea("footer", { class: "footer" }, "footer");
 }
