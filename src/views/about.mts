@@ -1,9 +1,11 @@
 import { PageLayout } from "../components/page_layout.mjs";
 import { AnyNode } from "ren";
 import { div, h3, li, p, ul } from "../utils.mjs";
+import { Context } from "../context.mjs";
 
-export function AboutPage(): AnyNode {
+export function AboutPage(ctx: Context): AnyNode {
   return PageLayout(
+    ctx,
     div({ class: "content-width responsive-typography" }, [
       div({}, [
         p("Привет!"),

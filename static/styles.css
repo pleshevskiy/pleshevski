@@ -2,7 +2,7 @@
   --min-width: 320px;
   --max-width: 1024px;
 
-  --default-color-white: hsl(0, 0, 100%);
+  --default-color-white: #ffffff;
   --color-blue: #1966df;
 
   --default-font-size: 16px;
@@ -59,6 +59,32 @@ ul, ol {
 .header {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
+}
+
+.main-menu {
+  display: flex;
+  flex-direction: row;
+}
+
+// anim
+.main-menu > a {
+  transition: all .2s ease-in-out;
+}
+
+.main-menu > a {
+  color: var(--color-blue);
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-blue);
+  text-decoration: none;
+}
+.main-menu > a:hover,
+.main-menu > a[aria-current]:not([aria-current=""]) {
+  color: var(--default-color-white);
+  background-color: var(--color-blue);
+}
+.main-menu > a:not(:last-child) {
+  margin-right: 1rem;
 }
 
 .content-width {

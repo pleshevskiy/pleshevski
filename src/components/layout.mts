@@ -1,4 +1,5 @@
 import { AnyNode, E, Ea, Elem } from "ren";
+import { config } from "../config.mjs";
 import { div } from "../utils.mjs";
 
 export function Layout(page: AnyNode): Elem {
@@ -15,15 +16,16 @@ export function Layout(page: AnyNode): Elem {
       }),
       E("title", "hello world"),
     ]),
-    E("body", [
-      div({ id: "root" }, page),
-      E(
-        "script",
-        `const ws = new WebSocket("ws://localhost:30001");
-        ws.addEventListener("message", (m) => {
-          if (m.data === "RELOAD") location.reload();
-        });`
-      ),
-    ]),
+    E("body", [div({ id: "root" }, page), config.isDev && HotReloadScript()]),
   ]);
+}
+
+function HotReloadScript(): Elem {
+  return E(
+    "script",
+    `const ws = new WebSocket("ws://localhost:30001");
+    ws.addEventListener("message", (m) => {
+      if (m.data === "RELOAD") location.reload();
+    });`
+  );
 }

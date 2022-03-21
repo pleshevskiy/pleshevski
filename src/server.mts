@@ -2,17 +2,21 @@ import * as http from "http";
 import * as fs from "fs/promises";
 import * as path from "path";
 import { Layout } from "./components/layout.mjs";
-import { ServerConfig } from "./config.mjs";
+import { config } from "./config.mjs";
 import { debug, info } from "./log.mjs";
 import { StrRenderer } from "ren";
 import { AboutPage } from "./views/about.mjs";
 import { E404 } from "./views/e404.mjs";
 import { WorksPage } from "./views/works.mjs";
+import { Context } from "./context.mjs";
 
-export function createServer(cfg: ServerConfig): void {
+export function createServer(): void {
   const server = http.createServer(handleHttpReq);
-  server.listen(cfg.port, () => {
-    info("[server]", `Server listening at http://localhost:${cfg.port}`);
+  server.listen(config.server.port, () => {
+    info(
+      "[server]",
+      `Server listening at http://localhost:${config.server.port}`
+    );
   });
 }
 
@@ -39,19 +43,20 @@ async function handleHttpReq(
         httpRes.writeHead(404).end("Not found");
       }
     } else {
+      const ctx: Context = { locPath: req.url };
       const ren = new StrRenderer();
       if (/^[/](?:about[/]?)?$/.test(req.url)) {
         httpRes
           .writeHead(200, { "content-type": "text/html" })
-          .end(ren.render(Layout(AboutPage())));
+          .end(ren.render(Layout(AboutPage(ctx))));
       } else if (/^[/]works[/]?$/.test(req.url)) {
         httpRes
           .writeHead(200, { "content-type": "text/html" })
-          .end(ren.render(Layout(WorksPage())));
+          .end(ren.render(Layout(WorksPage(ctx))));
       } else {
         httpRes
           .writeHead(404, { "content-type": "text/html" })
-          .end(ren.render(Layout(E404())));
+          .end(ren.render(Layout(E404(ctx))));
       }
     }
   } catch (err) {
