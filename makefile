@@ -1,14 +1,21 @@
 PAR := $(MAKE) -j 128
+DOCKER_NAME := pleshevski
+DOCKER_TAG := pleshevski
 
 
 watch:
 	$(PAR) hr ts-w
 
+docker-restart: docker-stop docker-run
+
+docker-stop:
+	docker rm ${DOCKER_NAME} --force
+
 docker-run:
-	docker run -d --restart always -p 30000:30000 pleshevski
+	docker run -d --restart always -p 30000:30000 --name ${DOCKER_NAME} ${DOCKER_TAG}
 
 docker-build:
-	docker build -t pleshevski .
+	docker build -t ${DOCKER_TAG} .
 
 build: ts
 
