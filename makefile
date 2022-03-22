@@ -5,7 +5,7 @@ watch:
 	$(PAR) hr ts-w
 
 docker-run:
-	docker run --restart always -p 30000:30000 pleshevski
+	docker run -d --restart always -p 30000:30000 pleshevski
 
 docker-build:
 	docker build -t pleshevski .

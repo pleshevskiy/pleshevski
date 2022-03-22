@@ -11,12 +11,13 @@ COPY package*.json ./
 RUN npm install \
   && apk del bash git openssh
 
-COPY src tsconfig.json ./
+COPY tsconfig.json ./
+COPY src ./src
 
 RUN npm run build \
   && npm prune --production
 
-COPY static ./
+COPY static ./static/
 
 EXPOSE 30000
 
