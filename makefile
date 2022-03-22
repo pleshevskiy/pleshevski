@@ -4,6 +4,12 @@ PAR := $(MAKE) -j 128
 watch:
 	$(PAR) hr ts-w
 
+docker-run:
+	docker run --restart always -p 30000:30000 pleshevski
+
+docker-build:
+	docker build -t pleshevski .
+
 build: ts
 
 start:
