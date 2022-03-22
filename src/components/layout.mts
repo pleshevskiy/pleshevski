@@ -14,7 +14,7 @@ export function Layout(page: AnyNode): Elem {
         rel: "stylesheet",
         href: "/static/styles.css",
       }),
-      E("title", "hello world"),
+      E("title", "pleshevski"),
     ]),
     E("body", [div({ id: "root" }, page), config.isDev && HotReloadScript()]),
   ]);
