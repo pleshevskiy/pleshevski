@@ -1,14 +1,5 @@
+
 /*
-
-# editors
-!/.vscode
-
-# ignores
-!/.gitignore
-!/.dockerignore
-
-# docker
-!/Dockerfile
 
 # makefile
 !/makefile
