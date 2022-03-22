@@ -7,13 +7,13 @@ watch:
 build: ts
 
 start:
-	node target/scripts/main.mjs
+	npm run start
 
 hr:
 	deno run -A ~/sandbox/hr/server.ts target static
 
 ts:
-	npx tsc
+	npm run build
 
 ts-w:
 	NODE_ENV=develop npx tsc-watch --onSuccess "make start"

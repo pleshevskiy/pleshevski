@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN apk update \
   && apk upgrade \
-  && apk add --no-cache bash git openssh make
+  && apk add --no-cache bash git openssh
 
 COPY package*.json ./
 
@@ -13,10 +13,10 @@ RUN npm install
 
 COPY . .
 
-RUN make build \
+RUN npm run build \
   && npm prune --production \
   && apk del bash git openssh
 
 EXPOSE 30000
 
-CMD make start
+CMD npm run start
