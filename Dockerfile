@@ -8,14 +8,15 @@ RUN apk update \
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm install \
+  && apk del bash git openssh
 
-
-COPY . .
+COPY src tsconfig.json ./
 
 RUN npm run build \
-  && npm prune --production \
-  && apk del bash git openssh
+  && npm prune --production
+
+COPY static ./
 
 EXPOSE 30000
 

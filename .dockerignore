@@ -1,11 +1,6 @@
 
 /*
 
-# makefile
-!/makefile
-
-# config
-!/.eslintrc.yml
 !/tsconfig.json
 
 # node modules
