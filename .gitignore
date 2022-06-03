@@ -4,22 +4,11 @@
 !/.vscode
 
 # ignores
-!/.gitignore
-!/.dockerignore
-
-# docker
-!/Dockerfile
-
-# makefile
-!/makefile
-
+!/*ignore
 # config
-!/.eslintrc.yml
-!/tsconfig.json
-
-# node modules
-!/package.json
-!/package-lock.json
+!/*file
+!/*.yml
+!/*.json
 
 # sources
 !/src

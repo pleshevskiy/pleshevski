@@ -1,0 +1,31 @@
+version: "3.9"
+
+networks:
+  rp_public:
+    external: true
+
+services:
+  site:
+    image: pleshevski
+    networks:
+      - rp_public
+    deploy:
+      replicas: 1
+      endpoint_mode: vip
+      update_config:
+        order: start-first
+      rollback_config:
+        order: start-first
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=rp_public
+        - traefik.constraint-label=rp_public
+        - traefik.http.routers.pleshevski_http.rule=Host(`pleshevski.ru`)
+        - traefik.http.routers.pleshevski_http.entrypoints=http
+        - traefik.http.routers.pleshevski_http.middlewares=https_redirect
+        - traefik.http.routers.pleshevski_https.rule=Host(`pleshevski.ru`)
+        - traefik.http.routers.pleshevski_https.entrypoints=https
+        - traefik.http.routers.pleshevski_https.tls=true
+        - traefik.http.routers.pleshevski_https.tls.certresolver=le
+        - traefik.http.services.pleshevski.loadbalancer.server.port=30000
+
