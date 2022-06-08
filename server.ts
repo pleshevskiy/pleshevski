@@ -18,7 +18,7 @@ async function main() {
 }
 
 async function startServer(cfg: ServerConfig) {
-  const srv = Deno.listen({ hostname: "localhost", port: cfg.port });
+  const srv = Deno.listen({ hostname: "0.0.0.0", port: cfg.port });
   log.info(`Server listening at http://localhost:${cfg.port}`);
 
   for await (const conn of srv) {
