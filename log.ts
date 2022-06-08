@@ -3,5 +3,8 @@ export function info(...args: unknown[]): void {
 }
 
 export function debug(...args: unknown[]): void {
-  console.log("[DEBUG]", ...args);
+  // choose better name for this env
+  if (Deno.env.get("DEBUG") === "1") {
+    console.log("[DEBUG]", ...args);
+  }
 }
