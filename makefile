@@ -1,10 +1,15 @@
 PAR := $(MAKE) -j 128
-DOCKER_NAME := pleshevski
-DOCKER_TAG := pleshevski
-
+DOCKER_NAME := recipes
+DOCKER_TAG := recipes
 
 watch:
-	$(PAR) hr ts-w
+	${PAR} deno-w sass-w
+
+deno-w:
+	deno run -A --watch server.ts
+
+sass-w:
+	sass -w styles/main.scss public/styles/main.css
 
 docker-restart: docker-stop docker-run
 
@@ -16,20 +21,3 @@ docker-run:
 
 docker-build:
 	docker build -t ${DOCKER_TAG} .
-
-build: ts
-
-start:
-	npm run start
-
-hr:
-	deno run -A ~/sandbox/hr/server.ts target static
-
-ts:
-	npm run build
-
-ts-w:
-	NODE_ENV=develop npx tsc-watch --onSuccess "make start"
-
-clean:
-	rm -rf target

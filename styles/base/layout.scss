@@ -1,0 +1,11 @@
+#root { @extend .col-str-sta, .w-100p, .mih-100vh }
+#main { @extend .col-str-sta, .flex-1, .miw-content, .w-100p, .gap-v-1x5 }
+.content { @extend .flex-1, .w-100p }
+.content-width { @extend .maw-content, .w-100p, .mar-ha, .pad-h-1x25 }
+
+.header { @extend .pad-v-1 }
+
+.footer {
+  @extend .pad-v-1;
+  border-top: 1px solid var(--color-faded);
+}

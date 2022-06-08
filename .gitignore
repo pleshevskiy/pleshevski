@@ -1,15 +1,18 @@
 /*
 
-# editors
-!/.vscode
-
-# ignores
 !/*ignore
-# config
 !/*file
+!/*.nix
 !/*.yml
-!/*.json
 
-# sources
-!/src
-!/static
+!/*.json
+!/*.ts
+
+!/public
+!/styles
+!/translates
+!/views
+
+# misc
+.DS_Store
+

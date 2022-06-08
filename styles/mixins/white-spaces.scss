@@ -1,0 +1,29 @@
+
+@mixin mar($val) { margin: #{$val}rem }
+@mixin mar-v($val) { @include mar-t($val); @include mar-b($val) }
+@mixin mar-h($val) { @include mar-r($val); @include mar-l($val) }
+@mixin mar-t($val) { margin-top: #{$val}rem }
+@mixin mar-r($val) { margin-right: #{$val}rem }
+@mixin mar-b($val) { margin-bottom: #{$val}rem }
+@mixin mar-l($val) { margin-left: #{$val}rem }
+@mixin mar-ha { margin-left: auto; margin-right: auto }
+
+@mixin pad($val) { padding: #{$val}rem }
+@mixin pad-v($val) { @include pad-t($val); @include pad-b($val) }
+@mixin pad-h($val) { @include pad-r($val); @include pad-l($val) }
+@mixin pad-t($val) { padding-top: #{$val}rem }
+@mixin pad-r($val) { padding-right: #{$val}rem }
+@mixin pad-b($val) { padding-bottom: #{$val}rem }
+@mixin pad-l($val) { padding-left: #{$val}rem }
+
+@mixin gap-v($val)   {
+  > :not([hidden]):not(.hidden-input) + :not([hidden]):not(.hidden-input) { @include mar-t($val) }
+}
+
+@mixin gap-h($val)   {
+  > :not(:last-child):not(:only-child) { @include mar-r($val) }
+}
+
+@mixin gap-h-l($val) {
+  > :not([hidden]):not(.hidden-input) + :not([hidden]):not(.hidden-input) { @include mar-l($val) }
+}

@@ -1,0 +1,49 @@
+kind: pipeline
+type: docker
+name: default
+
+trigger:
+  branch: 
+    - main
+  event: 
+    - push
+
+steps:
+  - name: build-docker-image
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: org_registry_username
+      password:
+        from_secret: org_registry_password
+      registry: ${ORG_REGISTRY}
+      repo: ${ORG_REGISTRY}/${DRONE_REPO}
+      tags:
+        - ${DRONE_COMMIT_SHA:0:8}
+        - ${DRONE_TARGET_BRANCH}
+
+  - name: deploy
+    when:
+      status:
+        - success
+    image: registry.pleshevski.ru/drone_plugins/docker_stack
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    environment:
+      PLESHEVSKI_IMAGE: ${ORG_REGISTRY}/${DRONE_REPO}:${DRONE_COMMIT_SHA:0:8}
+    settings:
+      username:
+        from_secret: org_registry_username
+      password:
+        from_secret: org_registry_password
+      name: 'pleshevski'
+
+image_pull_secrets:
+  - org_docker_config
+
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
+

@@ -1,12 +1,10 @@
-
 /*
 
-!/tsconfig.json
+!/public
+!/styles
+!/translates
+!/views
 
-# node modules
-!/package.json
-!/package-lock.json
+!/*.ts
+!/*.json
 
-# sources
-!/src
-!/static

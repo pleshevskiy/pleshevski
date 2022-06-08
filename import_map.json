@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "ren/": "https://git.pleshevski.ru/pleshevskiy/ren/raw/branch/main/ren/"
+  }
+}

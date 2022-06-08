@@ -1,0 +1,6 @@
+.row-sta-sta { @include flex-layout(row, sta, sta) }
+.row-sta-bet { @include flex-layout(row, sta, bet) }
+.col-sta-sta { @include flex-layout(col, sta, sta) }
+.col-str-sta { @include flex-layout(col, str, sta) }
+
+.flex-1 { @include flex(1 0) }

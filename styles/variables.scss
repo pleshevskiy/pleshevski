@@ -1,0 +1,9 @@
+@use "sass:math";
+
+$radius:          0.25rem;
+$col:             12;
+$col-gutter:      24;
+$page-max-width:  1440;
+$page-min-width:  320;
+$content-width:   $page-max-width - ($col-gutter * 2);
+$col-width:       math.div($content-width - $col-gutter * $col - 1, $col);
