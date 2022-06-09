@@ -10,7 +10,7 @@ export function Layout(ctx: Context, page: AnyNode): AnyNode {
         content: "width=device-width, initial-scale=1",
       }),
       E("link", { rel: "stylesheet", href: "/styles/main.css" }),
-      E("title", [], "Recipes"),
+      E("title", [], "Pleshevski"),
     ]),
     E("body", [], [
       E("div", { id: "root" }, [page]),
