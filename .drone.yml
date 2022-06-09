@@ -7,9 +7,14 @@ trigger:
     - main
   event: 
     - push
+    - promote
+    - rollback
 
 steps:
   - name: build-docker-image
+    when:
+      event:
+        - push
     image: plugins/docker
     settings:
       username:
@@ -46,4 +51,3 @@ volumes:
   - name: dockersock
     host:
       path: /var/run/docker.sock
-
