@@ -1,5 +1,6 @@
 {
   "imports": {
-    "ren/": "https://git.pleshevski.ru/pleshevskiy/paren/raw/commit/1a67959b1a19598f8e95bf2ec5f7b1a4c3da4da6/ren/"
+    "par/": "https://git.pleshevski.ru/pleshevskiy/paren/raw/commit/ac60fc50bfd4d5027925c9077a016697382c667e/par/",
+    "ren/": "https://git.pleshevski.ru/pleshevskiy/paren/raw/commit/ac60fc50bfd4d5027925c9077a016697382c667e/ren/"
   }
 }

@@ -1,3 +1,7 @@
+export function error(...args: unknown[]): void {
+  console.log("[ERROR]", ...args);
+}
+
 export function info(...args: unknown[]): void {
   console.log("[INFO]", ...args);
 }

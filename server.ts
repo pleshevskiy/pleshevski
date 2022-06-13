@@ -1,13 +1,14 @@
-import { StrRenderer } from "ren/str.ts";
+import { MarkdownParser } from "par/md.ts";
+import { HtmlStrRenderer } from "ren/html_str.ts";
 import * as log from "./log.ts";
 import rusTranslates from "./translates/rus.ts";
 import type { Translations } from "./translates/rus.ts";
 import { Context, getLangHref, Lang } from "./context.ts";
 import { E404Page } from "./views/pages/e404.ts";
 import { E500Page } from "./views/pages/e500.ts";
-import { AboutPage } from "./views/pages/about.ts";
 import { WorksPage } from "./views/pages/works.ts";
 import { Layout } from "./views/comp/layout.ts";
+import { ContentPage } from "./views/pages/content.ts";
 
 if (import.meta.main) {
   await main();
@@ -61,7 +62,8 @@ async function handleGet(req: Request) {
     }
     log.debug({ context: ctx });
 
-    const ren = new StrRenderer({
+    const par = new MarkdownParser();
+    const ren = new HtmlStrRenderer({
       wrapNode: Layout.bind(null, ctx),
       onVisitAttr: ([key, value]) => {
         if (key === "lhref" && typeof value === "string") {
@@ -74,16 +76,23 @@ async function handleGet(req: Request) {
 
     try {
       if (ctx.locPath === "/" || ctx.locPath === "/about") {
-        return createHtmlResponse(ren.render(AboutPage(ctx)));
+        const res = par.parse(await readMarkdownFile("data/about", ctx.lang));
+        return createHtmlResponse(ren.render(ContentPage(ctx, res)));
       } else if (ctx.locPath === "/works") {
         return createHtmlResponse(ren.render(WorksPage(ctx)));
       } else {
         return createHtmlResponse(ren.render(E404Page(ctx)), 404);
       }
-    } catch (_) {
+    } catch (e) {
+      log.error(e);
       return createHtmlResponse(ren.render(E500Page(ctx)), 500);
     }
   }
+}
+
+async function readMarkdownFile(dirPath: string, lang: Lang): Promise<string> {
+  return await Deno.readTextFile(`${dirPath}/${lang}.md`)
+    .catch((_) => Deno.readTextFile(`${dirPath}/${Lang.Rus}.md`));
 }
 
 async function loadAndUpdateTranslations(ctx: Context) {
