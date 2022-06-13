@@ -8,6 +8,7 @@
 !/*.json
 !/*.ts
 
+!/data
 !/public
 !/styles
 !/translates
