@@ -12,7 +12,7 @@ export function WorksPage(ctx: Context): AnyNode {
     E("div", classNames("content-width gap-v-1x5 responsive-typography"), [
       H3(ctx.tr.My_latest_works),
       ul([
-        li([RepoLink("ren", "/pleshevskiy/ren")]),
+        li([RepoLink("paren", "/pleshevskiy/paren")]),
         li([RepoLink("hwt", "github.com/pleshevskiy/hwt")]),
         li([RepoLink("sonic-channel", "github.com/pleshevskiy/sonic-channel")]),
         li([RepoLink("migra", "github.com/pleshevskiy/migra")]),
