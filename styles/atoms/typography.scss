@@ -42,7 +42,9 @@
     }
   }
 
-  > div + div, p + p {
+  p + ul,
+  ul + p,
+  p + p {
     margin-top: 1rem;
   }
 

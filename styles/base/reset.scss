@@ -6,7 +6,7 @@
   --default-color-black-0:    hsla(0, 0%, 0%, 0);
   --default-color-black-0x15: hsla(0, 0%, 0%, 0.15);
   --default-color-black-0x6:  hsla(0, 0%, 0%, 0.6);
-  --default-color-white:      #FFFFFF;
+  --default-color-white:      #ffffff;
   --default-color-warning:    #ffee58;
   --default-color-error:      #b00008;
   --default-color-success:    #417505;
@@ -14,30 +14,30 @@
   --color-brand-blue:     #1966df;
   --color-graphite:       #212121;
   --color-warm-gray:      #757575;
-  --color-pale:           #B6B6B6;
-  --color-faded:          #E0E0E0;
+  --color-pale:           #b6b6b6;
+  --color-faded:          #e0e0e0;
   // Layout
-  --max-width:          #{$page-max-width + px};
-  --min-width:          #{$page-min-width + px};
+  --max-content-width:  #{$page-max-width + px};
+  --min-content-width:  #{$page-min-width + px};
   // Borders
-  --rad-std-half:       #{math.div($radius, 2)};
-  --rad-std:            #{$radius};
-  --rad-std-x2:         #{$radius * 2};
-  --rad-std-x3:         #{$radius * 3};
+  --rad-std-half: #{math.div($radius, 2)};
+  --rad-std: #{$radius};
+  --rad-std-x2: #{$radius * 2};
+  --rad-std-x3: #{$radius * 3};
   // Font
-  --default-font-size:  16px;
-  --f-family:           system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Roboto,Oxygen-Sans, Ubuntu, Cantarell, "Segoe UI", Verdana, sans-serif;
-  --f-wei-thin:         100;
-  --f-wei-reg:          400;  // Normal = Regular
-  --f-wei-bold:         700;
-  --f-wei-black:        800;  // Extra Bold = Black
+  --default-font-size: 16px;
+  --f-family: system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Roboto,Oxygen-Sans, Ubuntu, Cantarell, "Segoe UI", Verdana, sans-serif;
+  --f-wei-thin: 100;
+  --f-wei-reg: 400;  // Normal = Regular
+  --f-wei-bold: 700;
+  --f-wei-black: 800;  // Extra Bold = Black
   // Z-index
-  --z-ind-background:   -100;
-  --z-ind-backward:     -1;
-  --z-ind-select:       50;
-  --z-ind-tooltip:      75;
-  --z-ind-high:         100;
-  --z-ind-overlay:      500;
+  --z-ind-background: -100;
+  --z-ind-backward: -1;
+  --z-ind-select: 50;
+  --z-ind-tooltip: 75;
+  --z-ind-high: 100;
+  --z-ind-overlay: 500;
 }
 
 *,
@@ -62,7 +62,7 @@ body {
   color: var(--color-graphite);
   font-weight: var(--f-wei-regular);
   font-family: var(--f-family);
-  min-width: var(--min-width);
+  min-width: var(--min-content-width);
   width: 100%;
   height: 100%;
 }

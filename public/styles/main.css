@@ -4,17 +4,17 @@
   --default-color-black-0: hsla(0, 0%, 0%, 0);
   --default-color-black-0x15: hsla(0, 0%, 0%, 0.15);
   --default-color-black-0x6: hsla(0, 0%, 0%, 0.6);
-  --default-color-white: #FFFFFF;
+  --default-color-white: #ffffff;
   --default-color-warning: #ffee58;
   --default-color-error: #b00008;
   --default-color-success: #417505;
   --color-brand-blue: #1966df;
   --color-graphite: #212121;
   --color-warm-gray: #757575;
-  --color-pale: #B6B6B6;
-  --color-faded: #E0E0E0;
-  --max-width: 1440px;
-  --min-width: 320px;
+  --color-pale: #b6b6b6;
+  --color-faded: #e0e0e0;
+  --max-content-width: 1440px;
+  --min-content-width: 320px;
   --rad-std-half: 0.125rem;
   --rad-std: 0.25rem;
   --rad-std-x2: 0.5rem;
@@ -55,7 +55,7 @@ body {
   color: var(--color-graphite);
   font-weight: var(--f-wei-regular);
   font-family: var(--f-family);
-  min-width: var(--min-width);
+  min-width: var(--min-content-width);
   width: 100%;
   height: 100%;
 }
@@ -451,7 +451,9 @@ svg:not(:root) {
 .responsive-typography ul > * + *, .responsive-typography ol > * + * {
   margin-top: 2rem;
 }
-.responsive-typography > div + div, .responsive-typography p + p {
+.responsive-typography p + ul,
+.responsive-typography ul + p,
+.responsive-typography p + p {
   margin-top: 1rem;
 }
 .responsive-typography li + li {
