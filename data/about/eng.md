@@ -2,25 +2,23 @@ Hi!
 
 My name is Dmitriy Pleshevskiy.
 
-I'm a lead software developer, architect, team leader and mentor
+I'm a lead software developer, architect, team leader and mentor.
 
-Open-source projects are my passion! I invest, exeriment, implement and improve
-projects in my spare time
+Open-source projects are my passion! I develop, maintain and improve projects in
+my spare time.
 
 Besides programming, I love to cook and spend time with my beloved family!
 
-### Programming languages
+### Skills
 
-- Prefer: Rust, TS, Bash
-- Extensive experience: Rust, TS, JS, Python, Bash
-- Limited experience: Haskell, Java, C#, C++
+I prefer and also have extensive experience: Rust, TypeScript, Bash, SQL,
+PostgreSQL
 
-### Databases
+- Programming Languages: Rust, TypeScript, SQL, Python, Bash, Haskell, Java, C#,
+  C++
+- Databases: PostgreSQL, MySQL, Sqlite, MsSQL, MongoDB, Reddis
 
-- Prefer: Postgres
-- Extensive experience: Postgres, MySQL, Sqlite, Mongo
-
-### Creating applications
+I also have extensive experience in creating the following applications:
 
 - Traditional (SSR + Forms)
 - API (REST/GraphQL/WebSocket/EventSource)
