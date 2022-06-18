@@ -11,7 +11,7 @@ export function getLangHref(lang: Lang, url: string): string {
 }
 
 export function getLangUrlPrefix(lang: Lang): string {
-  return lang === Lang.Rus ? "" : `/${lang}`;
+  return `/${lang}`;
 }
 
 export function iterLangs(): Lang[] {

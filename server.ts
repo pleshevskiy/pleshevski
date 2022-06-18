@@ -3,7 +3,7 @@ import { HtmlStrRenderer } from "ren/html_str.ts";
 import * as log from "./log.ts";
 import rusTranslates from "./translates/rus.ts";
 import type { Translations } from "./translates/rus.ts";
-import { Context, getLangHref, Lang } from "./context.ts";
+import { Context, getLangHref, getLangUrlPrefix, Lang } from "./context.ts";
 import { E404Page } from "./views/pages/e404.ts";
 import { E500Page } from "./views/pages/e500.ts";
 import { WorksPage } from "./views/pages/works.ts";
@@ -51,16 +51,27 @@ async function handleRequest(req: Request): Promise<Response> {
 }
 
 async function handleGet(req: Request) {
-  const ctx = createContextFromRequest(req);
+  const restCtx = createRestContextFromRequest(req);
 
   try {
-    const res = await tryCreateFileResponse(ctx.locPath);
+    const res = await tryCreateFileResponse(restCtx.locPath);
     return res;
   } catch (_) {
-    if (ctx.lang !== Lang.Rus) {
+    if (restCtx.lang == null && restCtx.newLang) {
+      return new Response(null, {
+        status: 301,
+        headers: {
+          location: getLangUrlPrefix(restCtx.newLang) + restCtx.locPath,
+        },
+      });
+    }
+
+    const ctx = intoAppContext(restCtx);
+
+    if (restCtx.lang !== Lang.Rus) {
       await loadAndUpdateTranslations(ctx);
     }
-    log.debug({ context: ctx });
+    log.debug({ context: restCtx });
 
     const par = new MarkdownParser();
     const ren = new HtmlStrRenderer({
@@ -75,10 +86,12 @@ async function handleGet(req: Request) {
     });
 
     try {
-      if (ctx.locPath === "/" || ctx.locPath === "/about") {
-        const res = par.parse(await readMarkdownFile("data/about", ctx.lang));
+      if (restCtx.locPath === "/" || restCtx.locPath === "/about") {
+        const res = par.parse(
+          await readMarkdownFile("data/about", ctx.lang),
+        );
         return createHtmlResponse(ren.render(ContentPage(ctx, res)));
-      } else if (ctx.locPath === "/works") {
+      } else if (restCtx.locPath === "/works") {
         return createHtmlResponse(ren.render(WorksPage(ctx)));
       } else {
         return createHtmlResponse(ren.render(E404Page(ctx)), 404);
@@ -112,19 +125,63 @@ async function loadAndUpdateTranslations(ctx: Context) {
   }
 }
 
-function createContextFromRequest(req: Request): Context {
+function intoAppContext(restCtx: RestContext): Context {
+  return {
+    locPath: restCtx.locPath,
+    lang: restCtx.lang || Lang.Rus,
+    tr: restCtx.tr,
+  };
+}
+
+function createRestContextFromRequest(req: Request): RestContext {
+  log.debug(req.headers);
+
   const locUrl = new URL(req.url);
-  const lang = langFromUrl(locUrl);
+  const lang = tryIntoAppLangFromUrl(locUrl);
 
   return {
     lang,
+    newLang: getPreferRequestLang(req.headers) ?? Lang.Rus,
     locPath: stripPrefix(`/${lang}`, locUrl.pathname),
     tr: rusTranslates,
   };
 }
 
-function langFromUrl(url: URL): Lang {
-  return url.pathname.startsWith("/eng/") ? Lang.Eng : Lang.Rus;
+interface RestContext {
+  locPath: string;
+  lang: Lang | null;
+  newLang: Lang;
+  tr: Translations;
+}
+
+function getPreferRequestLang(headers: Headers): Lang | null {
+  const acceptLanguageHeader = headers.get("accept-language");
+  if (!acceptLanguageHeader) return null;
+
+  const acceptLanguages = acceptLanguageHeader
+    .split(/,\s*/)
+    .map((part) => part.split(";q=")[0])
+    .map(tryIntoAppLangFromAcceptLangCode)
+    .filter((lang): lang is Lang => !!lang);
+  return acceptLanguages[0] ?? null;
+}
+
+function tryIntoAppLangFromAcceptLangCode(lang: string): Lang | null {
+  return lang === "*"
+    ? Lang.Rus
+    : lang.startsWith("en")
+    ? Lang.Eng
+    : lang.startsWith("ru")
+    ? Lang.Rus
+    : null;
+}
+
+function tryIntoAppLangFromUrl(url: URL): Lang | null {
+  return url.pathname.startsWith("/eng/")
+    ? Lang.Eng
+    : url.pathname.startsWith("/rus/")
+    ? Lang.Rus
+    : null;
 }
 
 function stripPrefix(prefix: string, val: string): string {
