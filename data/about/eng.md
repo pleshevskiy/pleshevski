@@ -14,8 +14,8 @@ Besides programming, I love to cook and spend time with my beloved family!
 Programming Languages:
 
 - Rust (prefer, 4-year exp)
-- TypeScript (prefer, 8-year exp)
-- SQL (prefer, 7-year exp)
+- TypeScript (prefer, solid 8-year exp)
+- SQL (prefer, solid 7-year exp)
 - Python
 - Bash
 - Haskell
@@ -25,7 +25,7 @@ Programming Languages:
 
 Databases:
 
-- PostgreSQL (prefer, 6-year exp)
+- PostgreSQL (prefer, solid 6-year exp)
 - MySQL
 - Sqlite
 - MsSQL
