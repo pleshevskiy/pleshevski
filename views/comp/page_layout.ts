@@ -41,7 +41,7 @@ export function Footer(ctx: Context): AnyNode {
           SERVER_STARTED_AT.toLocaleDateString(),
         ]),
         E("div", [], [
-          RepoLink(ctx.tr.Source_code, "/pleshevskiy/recipes"),
+          RepoLink(ctx.tr.Source_code, "/pleshevskiy/pleshevski.ru"),
         ]),
       ]),
       ChangeLang(ctx),
