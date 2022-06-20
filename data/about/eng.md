@@ -11,12 +11,26 @@ Besides programming, I love to cook and spend time with my beloved family!
 
 ### Skills
 
-I prefer and also have extensive experience: Rust, TypeScript, Bash, SQL,
-PostgreSQL
+Programming Languages:
 
-- Programming Languages: Rust, TypeScript, SQL, Python, Bash, Haskell, Java, C#,
-  C++
-- Databases: PostgreSQL, MySQL, Sqlite, MsSQL, MongoDB, Reddis
+- Rust (prefer, 4-year exp)
+- TypeScript (prefer, 8-year exp)
+- SQL (prefer, 7-year exp)
+- Python
+- Bash
+- Haskell
+- Java
+- C#
+- C++
+
+Databases:
+
+- PostgreSQL (prefer, 6-year exp)
+- MySQL
+- Sqlite
+- MsSQL
+- MongoDB
+- Reddis
 
 I also have extensive experience in creating the following applications:
 
@@ -26,3 +40,15 @@ I also have extensive experience in creating the following applications:
 - Hybrid (SSR + SPA)
 - Console
 - Crossplatform
+
+### Contacts
+
+Telegram: [Dmitriy Pleshevskiy](https://telegram.me/da_pranaya)
+
+Email: [dmitriy@ideascup.me](mailto:dmitriy@ideascup.me)
+
+### Links
+
+[My Git Repo](https://git.pleshevski.ru/)
+
+[My Github](https://github.com/pleshevskiy)
