@@ -30,10 +30,20 @@ function navLink(lhref: string, ctx?: Context): Attrs {
   return attrs;
 }
 
+const SERVER_STARTED_AT = new Date();
+
 export function Footer(ctx: Context): AnyNode {
   return E("footer", classNames("footer"), [
     E("div", classNames("content-width row-sta-bet"), [
-      RepoLink(ctx.tr.Source_code, "/pleshevskiy/recipes"),
+      E("div", classNames("gap-v-1x5"), [
+        E("div", [], [
+          E("b", [], "Updated At:"),
+          SERVER_STARTED_AT.toLocaleDateString(),
+        ]),
+        E("div", [], [
+          RepoLink(ctx.tr.Source_code, "/pleshevskiy/recipes"),
+        ]),
+      ]),
       ChangeLang(ctx),
     ]),
   ]);
